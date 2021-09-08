@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/style.css">
+<title>Switch to Linux</title>
+<style>
+
+</style>
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tutorials">Tutorials</a></li>
+            <li><a href="/faq">FAQ</a></li>
+        </ul>
+    </nav>
+    <div id="menuToggle">
+            <!--
+            A fake / hidden checkbox is used as click reciever,
+            so you can use the :checked selector on it.
+            -->
+            <input type="checkbox" />
+            <span class="material-icons" style="font-size: 36px">menu</span>
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+            <ul id="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/tutorials">Tutorials</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+        </div>
+    <div id="wrapper">
+    <h1>Installing Linux Mint</h1>
+    <h2> </h2>
+    </div>
+    </header>
+    <main>
+    <h2>Downloading</h2>
+    <p>
+        To download Linux Mint, go <a href="https://mirrors.layeronline.com/linuxmint/stable/20.2/linuxmint-20.2-cinnamon-64bit.iso">here</a>. The file will be downloaded to your computer.<br>
+        After it finished, download Etcher <a href="https://www.balena.io/etcher/">here</a>.<br>
+        Install Etcher like you would install any other software. This is also the time to say goodbye to Windows Installer!<br>
+        Plug in a USB flash of at least 4 GB in your computer. <br>
+        Open Etcher.<br>
+        Under Select image, navigate to the file you downloaded (the Linux Mint one).<br>
+        Under Select drive, select the USB flash drive you plugged in.<br>
+        Press Flash!.<br>
+        Wait for the flash to complete.<br>
+        Restart your computer.<br>
+        If it boots into Windows, try restarting again, this time holding down the F1, F2, F10, F11 or F12 key, depending on your PC manufacturer.<br>
+        Change your "boot order" to put the flash drive at the top. You might need to look it up online.<br>
+        If you see a black screen with a menu, go to the next step.
+    </p>
+    <h2>Installing</h2>
+    <p>
+        You should see a menu like this:
+        <img src="/mint-installation/1.png" alt="The menu">
+        The menu may differ, but as long as it says Linux Mint somewhere it is okay.
+        Either wait 10 seconds or press Enter to boot.
+        When booted, you should see a desktop.
+        <img src="/mint-installation/2.png" alt="The desktop">
+        It may look usable, but changes made are temporary. Double-click the Install Linux Mint icon on the desktop to open the installer.
+        <img src="/mint-installation/3.png" alt="Language selection">
+        Select your language.
+        <img src="/mint-installation/4.png" alt="Keyboard layout">
+        Set the keyboard layout. You can add more after the system is installed.<br><br>
+        If you have Wi-Fi, connect to the internet. I did this on a virtual machine on a desktop computer so I don't have Wi-Fi.
+        <img src="/mint-installation/5.png" alt="Multimedia codecs">
+        Tick the box to install multimedia codecs.
+        <img src="/mint-installation/6.png" alt="Installation type">
+        Choose the installation type. If you had Windows installed already, you should see three options: Erase the disk and install Linux Mint, Install Linux Mint alongside Windows 7/10/11 and Something else.
+        Choose the first one to wipe the entire computer, or the second one to keep both OSes.
+        <img src="/mint-installation/7.png" alt="Popup">
+        Click Install Now. You should see this confirmation. Click Continue.
+        <img src="/mint-installation/8.png" alt="Time zone">
+        Select a city to set time, date and region settings. I chose Bucharest because I live in Romania.
+        <img src="/mint-installation/9.png" alt="User account">
+        Fill in this form with your username, password, and other info.
+        <img src="/mint-installation/10.png" alt="User account - filled">
+        A filled in form.
+        <img src="/mint-installation/11.png" alt="Installing">
+        Linux Mint is installing. Sit back and enjoy the slideshow.
+        <img src="/mint-installation/12.png" alt="Installation complete">
+        Linux Mint is installed. Shut down the live session so you can start using the real OS.
+        <img src="/mint-installation/13.png" alt="Remove the USB drive">
+        Remove the USB stick, then press enter.
+    </p>
+    <h2>Starting using Linux Mint</h2>
+    <p>
+        Start your computer.
+        <img src="/mint-installation/14.png" alt="Welcome!">
+        You should see the login screen. Welcome to Linux Mint!
+        Enter the password you set in the setup process.
+        <img src="/mint-installation/15.png" alt="The desktop">
+        You should see the Linux Mint desktop with the welcome screen.
+        You can close this.
+        <img src="/mint-installation/16.png" alt="Main menu">
+        You can open the menu the same way you would on Windows.
+        <img src="/mint-installation/17.png" alt="Settings">
+        Explore the settings by searching for settings in the menu.
+        <img src="/mint-installation/18.png" alt="Apps">
+        Install some apps! Find the software manager in the menu.
+        <img src="/mint-installation/19.png" alt="Themes">
+        Have fun with themes!
+        <img src="/mint-installation/20.png" alt="Updates">
+        One more thing to do: check your updates. Click the little shield icon in the taskbar.
+        In this window, click OK.
+        <img src="/mint-installation/21.png" alt="Updates">
+        You can click Install updates to install all updates. You don't need to restart after every update, only when the restart banner appears.
+        <br><br>
+        Have fun with your new Linux system!
+    </p>
+    </main>
+    <footer>
+        <h2>switchtolinux.today</h2>
+        <ul>
+            <li><a href="https://Secret-chest.github.io">Made by Secret-chest</a></li>
+            <li><a href="/faq">FAQ</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,347 @@
+@import url("https://fonts.googleapis.com/css?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Mono&display=swap");
+html, body {
+  /* fix */
+    max-width: 100%;
+}
+html, body {
+    overflow: overlay;
+    overflow-x: hidden;
+}
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    background: #263238;
+}
+body *::selection {
+    background: #00bcd4;
+    color: #ffffff;
+}
+#wrapper {
+    margin: 12px;
+}
+#wrapper img {
+    float: right;
+    top: 48px;
+    right: 24px;
+    width: 240px;
+}
+#wrapper h1, #wrapper h2 {
+    float: left;
+    clear: left; 
+}
+.carousel {
+    scroll-behavior: smooth;
+    display: inline-flex;
+    height: 200px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    box-shadow: 0 4px 8px #000000;
+    background: #37474f;
+    overflow-x: scroll;
+    overflow-y: hideen;
+}
+.carousel div {
+    height: 100%;
+    width: 200px;
+    word-wrap: break-word;
+    padding: 8px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+.carousel a, .carousel a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+}
+.carousel div:hover {
+    background: #26c6da;
+    color: #000000;
+}
+.carousel div img {
+    height: 50%;
+}
+main {
+    line-height: 1.5;
+}
+pre, code {
+    font-family: "Roboto Mono", monospace;
+}
+pre, blockquote {
+    background: #eeeeee;
+    border-left: 4px solid #1a237e;
+    padding: 16px 0 0 0;
+    margin: 16px 16px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+img {
+    width: 100%;
+}
+.card-full {
+    box-shadow: 0 4px 8px #000000;
+    padding: 16px;
+    margin: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+header h1 {
+    font-weight: 700;
+    font-size: 72px;
+    text-align: left;
+}
+h1 {
+    font-weight: 700;
+    font-size: 48px;
+}
+main {
+    max-width: 576px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    animation-name: content;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+}
+header {
+    color: #ffffff;
+    background: #1a237e;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    margin-top: 48px;
+}
+footer {
+    background: #1a237e;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+nav ul {
+    list-style-type: none;
+    display: inline;
+    background: #1e237e;
+    width: 100vw;
+    height: 48px;
+    padding: auto;
+    position: fixed;
+    top: 0;
+    margin: 0;
+    box-shadow: 0 4px 8px #000000;
+    z-index: 1000;
+    padding-left: 40px;
+}
+nav ul li {
+    padding: 16px;
+    position: relative;
+    top: 12px;
+    display: inline;
+}
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+a {
+    color: #76ff03;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: #26c6da;
+    transition: cubic-bezier(1, 0, 0, 1) 0.4s;
+} 
+
+@keyframes content {
+    from {
+        opacity: 0;
+        top: 128px;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+::-webkit-scrollbar-thumb {
+    background: #00000033;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #00000066;
+}
+
+
+#menuToggle
+{
+    display: block;
+    position: fixed;
+    top: 0;
+    
+    z-index: 1000;
+    
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 0;
+}
+
+#menuToggle span {
+    left: 4px;
+    top: 8px;
+    position: relative;
+}
+
+#menuToggle input:checked ~ span::before {
+    content: "menu_open";
+    visibility: visible;
+}
+
+#menuToggle input:checked ~ span {
+    visibility: hidden;
+}
+
+#menuToggle input
+{
+    display: block;
+    width: 36px;
+    height: 36px;
+    position: fixed;
+    top: 4px;
+    left: 0;
+    
+    cursor: pointer;
+    
+    opacity: 0; /* debugging */
+    z-index: 2; /* and place it over the hamburger */
+    
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+    position: absolute;
+    left: -4px;
+    width: 400px;
+    height: 100vh;
+    
+    background: #1a237e;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    
+    transition: transform 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    box-shadow: 0 4px 8px #000000;
+}
+
+#menu li
+{
+    padding: 16px 0;
+    font-size: 24px;
+}
+#menu a {
+    color: #ffffff;
+}
+#menu a:hover {
+    color: #ffab00;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+    transform: none;
+}
+#menuToggle input:checked span
+{
+    content: "menu_open";
+}
+.material-icons {
+    font-family: "Material Icons";
+}
+@media screen and (min-width: 584px) {
+    #menuToggle {
+        display: none;
+    }
+}
+@media screen and (max-width: 584px) {
+    nav ul li {
+        display: none;
+    }
+    footer ul {
+        display: block;
+    }
+    footer {
+        text-align: center;
+    }
+    header h1 {
+        font-size: 48px;
+    }
+}
+@media screen and (max-width: 584px) {
+    .card-full, blockquote, pre {
+        width: calc(100% - 16px);
+        margin: 0;
+    }
+    main {
+        padding: 8px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    #wrapper img {
+        display: none;
+    }
+}
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+footer {
+    flex-shrink: 0;
+}
+footer ul {
+    list-style-type: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+footer ul li {
+    padding: 8px;
+    display: inline;
+}
+.gray {
+    opacity: 0.5;
+}
+.error-title {
+    font-size: 120px;
+    position: absolute;
+    right: 32px;
+    bottom: 160px;
+}

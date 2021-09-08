@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/style.css">
+<title>404</title>
+<style>
+
+</style>
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/my">Projects</a></li>
+        </ul>
+    </nav>
+    <div id="menuToggle">
+            <!--
+            A fake / hidden checkbox is used as click reciever,
+            so you can use the :checked selector on it.
+            -->
+            <input type="checkbox" />
+            <span class="material-icons" style="font-size: 36px">menu</span>
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+            <ul id="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/my">Projects</a></li>
+            </ul>
+        </div>
+    <h1>Page not found</h1>
+    </header>
+    <span class="error-title">404</span>
+    <main>
+    <p>
+        Sorry, the page you requested was not found.
+        Use the navigation menu and footer for more links.
+        <a href="/">Return to the home page</a>
+    </p>
+    </main>
+    <footer>
+        <h2>Secret-chest</h2>
+        <ul>
+            <li><a href="https://github.com/Secret-chest">GitHub</a></li>
+            <li><a href="https://scratch.mit.edu/users/mumu245">Scratch</a></li>
+            <li class="gray">YouTube channel coming soon</li>
+        </ul>
+    </footer>
+</body>
+</html>
