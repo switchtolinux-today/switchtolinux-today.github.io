@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/style.css">
+<title>Switch to Linux</title>
+<style>
+
+</style>
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tutorials">Tutorials</a></li>
+            <li><a href="/faq">FAQ</a></li>
+        </ul>
+    </nav>
+    <div id="menuToggle">
+            <!--
+            A fake / hidden checkbox is used as click reciever,
+            so you can use the :checked selector on it.
+            -->
+            <input type="checkbox" />
+            <span class="material-icons" style="font-size: 36px">menu</span>
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+            <ul id="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/tutorials">Tutorials</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+        </div>
+    <div id="wrapper">
+    <h1>Installing Material Design theme on Linux Mint</h1>
+    <h2> </h2>
+    </div>
+    </header>
+    <main>
+    <h2>Introduction</h2>
+    <p>
+        Material Design is a visual style created by Google in 2014. If you are obsessed with it, like me, then you'll be happy to know that it is also available as a Linux Mint theme.
+        This tutorial is actually very easy, but I made it step-by-step so it looks harder than it actually is.
+    </p>
+    <h2>Install git</h2>
+    <img src="/img/1.png" alt="Terminal">
+    <p>You need git to download the theme. Open a terminal and paste:</p>
+    <pre>sudo apt install git</pre>
+    <blockquote>
+        <h3>Tip: Working with <code>apt</code></h3>
+        When using <code>apt</code> it may ask for your password. Just type it in and press enter.
+        <code>apt</code> may also ask for you to type <code>y</code> or <code>n</code>. Type <code>y</code> and press enter to continue.
+    </blockquote>
+    <p>
+        <img src="/img/2.png" alt="Git">
+        Press enter.
+    </p>
+    <h2>Install themes</h2>
+    <p>
+        In the same terminal type:
+        <pre>git clone https://github.com/snwh/
+            paper-icon-theme.git</pre>
+        <img src="/img/6.png" alt="Git">
+        You are now downloading the Paper icon theme.
+        <img src="/img/7.png" alt="Files">
+        Open Files.
+        <img src="/img/8.png" alt="Show hidden">
+        Right-click on an empty space, then check Show hidden files.
+        <img src="/img/20.png" alt="Open">
+        Open the <code>paper-icon-theme</code> folder.
+        <img src="/img/23.png" alt="Cut">
+        Select the Paper and Paper-Mono-Dark folders, then cut (Ctrl-X) them.
+        <img src="/img/24.png" alt="Go back">
+        Go back using the up arrow.
+        <img src="/img/25.png" alt="Open">
+        Open the <code>.icons</code> folder.
+        <img src="/img/26.png" alt="Paste here">
+        Paste (Ctrl-V) the files here.
+        <img src="/img/27.png" alt="Themes">
+        Open Themes.
+        <img src="/img/28.png" alt="Add/remove">
+        Click the Add/Remove tab.
+        <img src="/img/29.png" alt="Search">
+        Search for Adapta.
+        <img src="/img/30.png" alt="Installing themes">
+        Click the download button on both themes.
+        <img src="/img/31.png" alt="Themes">
+        Click the Themes tab.
+        <img src="/img/32.png" alt="Toolbar theme">
+        Change the title bar theme to Adapta.
+        <img src="/img/34.png" alt="Icon theme">
+        Change the icon theme to Paper.
+        <img src="/img/35.png" alt="Control theme">
+        Change the control (window content) theme to Adapta if you want a light theme, or Adapta-Nokto for a dark one.
+        <img src="/img/36.png" alt="Desktop theme">
+        Change the desktop theme to Adapta / Adapta-Nokto.
+        <img src="/img/37.png" alt="Font selection">
+        Open the Font Selection menu.
+        <img src="/img/38.png" alt="Changing font">
+        Set the default font to Roboto Regular. If you do not have it, run <code>sudo apt install fonts-roboto</code> in a terminal. Repeat this for the desktop font.
+        <img src="/img/39.png" alt="Changing font">
+        Set the window title font to Roboto Medium. Now you are done!
+    </p>
+    </main>
+    <footer>
+        <h2>switchtolinux.today</h2>
+        <ul>
+            <li><a href="https://Secret-chest.github.io">Made by Secret-chest</a></li>
+            <li><a href="/faq">FAQ</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

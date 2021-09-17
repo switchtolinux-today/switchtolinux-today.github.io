@@ -74,12 +74,16 @@ pre, code {
     font-family: "Roboto Mono", monospace;
 }
 pre, blockquote {
-    background: #eeeeee;
+    background: #37474f;
     border-left: 4px solid #1a237e;
-    padding: 16px 0 0 0;
+    padding: 8px;
     margin: 16px 16px 0 0;
     width: 100%;
     box-sizing: border-box;
+}
+pre {
+    word-wrap: break-word;
+    width: 100%;
 }
 img {
     width: 100%;
