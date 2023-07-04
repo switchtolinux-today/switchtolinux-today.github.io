@@ -8,7 +8,7 @@ body, button, input, select {
 }
 
 textarea {
-    font-family: monospace;
+    font-family: "Roboto Mono", "Source Sans Mono", Consolas, "Noto Mono", "Noto Sans Mono", "Courier Prime", "Cousine", "Courier New", "Liberation Mono", Courier, monospace;
 }
 
 html, body, header {

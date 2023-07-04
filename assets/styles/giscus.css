@@ -3,7 +3,7 @@
  * https://github.com/primer/primitives/blob/main/LICENSE
  */
 
- main {
+main {
     --color-prettylights-syntax-comment: #6e7781;
     --color-prettylights-syntax-constant: #0550ae;
     --color-prettylights-syntax-entity: #8250df;
@@ -88,12 +88,20 @@
     /*! Extensions from @primer/css/alerts/flash.scss */
     --color-social-reaction-bg-hover: var(--color-scale-gray-1);
     --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
-  }
+}
   
-  main .pagination-loader-container {
+main .pagination-loader-container {
     background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line.svg");
-  }
+}
   
-  main .gsc-loading-image {
+main .gsc-loading-image {
     background-image: url("https://github.githubassets.com/images/mona-loading-default.gif");
-  }
+}
+
+body, button, input, select {
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arimo, Arial, Verdana, Tahoma, sans-serif;
+}
+
+textarea {
+    font-family: "Roboto Mono", "Source Sans Mono", Consolas, "Noto Mono", "Noto Sans Mono", "Courier Prime", "Cousine", "Courier New", "Liberation Mono", Courier, monospace;
+}
