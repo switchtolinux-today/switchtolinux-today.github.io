@@ -99,7 +99,7 @@ main .gsc-loading-image {
 }
 
 body, button, input, select {
-    font-family: Roboto, "Helvetica Neue", Helvetica, Arimo, Arial, Verdana, Tahoma, sans-serif;
+    font-family: "Roboto Flex", Roboto, "Helvetica Neue", Helvetica, Arimo, Arial, Verdana, Tahoma, sans-serif;
 }
 
 textarea {
