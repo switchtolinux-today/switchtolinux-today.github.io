@@ -1,0 +1,86 @@
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]) {
+    background: none;
+    padding: 8px 8px 8px 4px;
+    display: block;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #00000080;
+    width: 100%;
+}
+
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]):focus {
+    outline: none;
+    border-bottom: 1px solid #00bcd4;
+}
+
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]):focus ~ label,
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]):valid:not(:placeholder-shown) ~ label {
+    bottom: 4em;
+    font-size: 12px;
+    color: #00bcd4;
+}
+
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]):invalid:focus ~ label,
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]):invalid:not(:placeholder-shown) ~ label {
+    bottom: 4em;
+    font-size: 12px;
+    color: #d50000;
+}
+
+textarea {
+    background: none;
+    padding: 8px 8px 8px 4px;
+    display: block;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #00000080;
+    width: 100%;
+}
+
+textarea:focus {
+    outline: none;
+    border-bottom: 1px solid #00bcd4;
+}
+
+input[type="password"] {
+    letter-spacing: 0.3em;
+}
+
+.input-container {
+    display: block;
+    position: relative;
+}
+
+.inline-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+input[type=radio] {
+    width: 16px;
+    height: 16px;
+}
+
+:is(input[type=text], input[type=password], input[type=email], input[type=number], input[type=url]) ~ label {
+    color: #00000080;
+    font-size: 16px;
+    font-weight: normal;
+    position: relative;
+    pointer-events: none;
+    left: 4px;
+    bottom: 2em;
+    transition: 250ms ease all;
+}
+
+textarea ~ label {
+    color: #00000080;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 4px;
+    top: 8px;
+    transition: 250ms ease all;
+}

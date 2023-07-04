@@ -1,0 +1,787 @@
+---
+layout: default
+---
+
+{% assign sum = 0 %}
+{% assign sum = sum | plus: page.difficulty.installation %}
+{% assign sum = sum | plus: page.difficulty.daily-usage %}
+{% assign sum = sum | plus: page.difficulty.maintenance %}
+{% assign sum = sum | plus: page.difficulty.upgrading %}
+{% assign sum = sum | plus: page.difficulty.troubleshooting %}
+{% assign general-difficulty = sum | divided_by: 2.5 | round | divided_by: 2.0 %}
+{% assign split-result = general-difficulty | split: '.' %}
+{% if split-result.last == '0' %}
+    {% assign general-difficulty = general-difficulty | remove: '.0' %}
+{% endif %}
+
+<link rel="stylesheet" href="/assets/styles/inputs.css">
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<link rel="stylesheet" href="https://unpkg.com/flickity-fullscreen@2/fullscreen.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="https://unpkg.com/flickity-fullscreen@2/fullscreen.js"></script>
+
+<style>
+    #distro-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #distro-header #distro-logo-name {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        column-gap: 4px;
+    }
+
+    #distro-header > .button {
+        flex-grow: 0;
+    }
+
+    #distro-logo {
+        width: 36px;
+        height: 36px;
+        display: block;
+        background-color: #ffffff;
+        margin-right: 4px;
+        padding: 4px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #distro-logo img {
+        width: 85%;
+    }
+
+    #distro-main-screenshot {
+        width: 100%;
+    }
+
+    .difficulty {
+        height: 2em;
+    }
+
+    #distro-difficulty {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+    }
+
+    body {
+        background-image: linear-gradient(to bottom, {{ page.colour }}, #00000000 256px);
+    }
+
+    .star-rating {
+        position: relative;
+        appearance: none;
+        color: transparent;
+        width: auto;
+        display: inline-block;
+        vertical-align: baseline;
+        font-size: 2em;
+    }
+
+    .star-rating::before {
+        --percent: calc(4.7/5*100%);
+        content: '★★★★★';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #00000040;
+        background: linear-gradient(to right, #FBC02D var(--percent), #00000040 var(--percent));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .star-rating-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #comment-message {
+        resize: vertical;
+        min-height: 4em;
+        width: 100%;
+    }
+
+    #comment-star-rating-options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row-reverse nowrap;
+    }
+
+    #comment-star-rating-options input[type=radio] {
+        position: fixed;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #comment-star-rating-options input[type=radio] ~ label {
+        cursor: pointer;
+        font-size: 0;
+        color: #00000040;
+        transition: color 250ms ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #comment-type-options > .inline-input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #comment-star-rating-options input[type=radio]:checked ~ label {
+        color: #FBC02D;
+    }
+
+    #comment-star-rating-options input[type=radio] ~ label:hover, #comment-star-rating-options label:hover ~ label {
+        color: #ffa000;
+    }
+
+    #comment-star-rating-options input[type=radio] ~ label::before {
+        content: "★";
+        font-size: 2rem;
+        opacity: 1;
+        display: inline-block;
+    }
+
+    #comment-type-options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row wrap;
+        column-gap: 3em;
+    }
+
+    .carousel-cell img {
+        width: 100%;
+    }
+
+    #mini-carousel .carousel-cell {
+        height: 72px;
+        max-width: 128px;
+    }
+
+    #main-carousel {
+        margin-bottom: 28px;
+    }
+
+    #mini-carousel {
+        margin-bottom: 16px;
+    }
+
+    .carousel-cell {
+        transition: box-shadow 0.5s ease-in-out, scale 0.25s ease-in-out;
+        display: block;
+    }
+
+    #main-carousel .carousel-cell.is-selected {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .flickity-page-dots {
+        bottom: 0px;
+    }
+
+    .flickity-page-dots .dot {
+        height: 4px;
+        width: 40px;
+        margin: 0 4px;
+        border-radius: 0;
+    }
+
+    .flickity-prev-next-button {
+        background: #ffffff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .flickity-button-icon {
+        fill: #000000c0;
+    }
+
+    #main-carousel .flickity-viewport {
+        padding: 28px;
+    }
+</style>
+
+<div id="distro-header">
+    <div id="distro-logo-name">
+        <div id="distro-logo">
+            <img src="{{ page.logo }}" alt="{{ page.title }} logo">
+        </div>
+        <h1>{{ page.title }}</h1>
+    </div>
+    <a href="{{ page.homepage }}" class="button" target="_blank">Homepage</a>
+</div>
+
+{% if page.screenshot.size == 0 %}
+    <h2>No screenshots available</h2>
+{% else %}
+    <div id="main-carousel" data-flickity='{ "draggable": true, "freeScroll": false, "wrapAround": true, "fullscreen": true, "lazyLoad": 2, "dragTreshold": 12, "selectedAttraction": 0.1, "friction": 0.666, "imagesLoaded": true, "cellSelector": ".carousel-cell", "arrowShape": "M 79.64,86.64 43,50 79.64,13.28 68.36,2 l -48,48 48,48 z" }'>
+        {% for screenshot in page.screenshot %}
+            <figure class="carousel-cell">
+                <img src="{{ screenshot[0] }}">
+                <figcaption>{{ screenshot[1] }}</figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+    <div id="mini-carousel" data-flickity='{ "asNavFor": "#main-carousel", "draggable": true, "freeScroll": false, "wrapAround": false, "contain": true, "prevNextButtons": false, "pageDots": false, "cellAlign": "center", "dragTreshold": 12, "selectedAttraction": 0.025, "friction": 0.25 }'>
+        {% for screenshot in page.screenshot %}
+            <div class="carousel-cell">
+                <img src="{{ screenshot[0] }}">
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<article id="distro-body">
+    <div id="distro-ratings-difficulty">
+        <a href="#difficulty-ratings" id="distro-difficulty">General difficulty »
+            <img src="/assets/images/difficulty/{{ general-difficulty }}.svg" class="difficulty" alt="Level {{ general-difficulty }} out of 5" title="Level {{ general-difficulty }} out of 5">
+        </a>
+    </div>
+    {{ content }}
+    {% if page.wikipedia %}
+        <a href="{{ page.wikipedia }}">Read about this distro on Wikipedia</a>
+    {% endif %}
+    <p>
+        <p>
+            Price: <b>
+                {% if page.price[0] == 0 and page.price[1] == 0 %} Free
+                {% elsif page.price[0] == 0 %} Free, with editions up to {{ page.price[1] }} &euro; available
+                {% elsif page.price[0] == page.price[1] %} {{ page.price[1] }} &euro;
+                {% else %} {{ page.price[0] }} to {{ page.price[1] }} &euro;
+                {% endif %}
+            </b>
+            |
+            {% if page.commercial %} Developed by a for-profit business
+            {% else %} Non-profit
+            {% endif %}
+        </p>    
+        Recommended for <b>{{ page.usecase }}</b> use.<br>
+        Available in <b>{{ page.desktops | size }}</b> desktop variants:
+        {% if page.desktops.size == 0 %}
+            none.
+        {% elsif page.desktops.size == 1 %}
+            {{ page.desktops[0] }}.
+        {% else %}
+            {% for desktop in page.desktops %}
+                {% if forloop.last %}and{% endif %} <a href="/desktops/{{ desktop }}.html">{{ desktop }}</a>{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+            {% endfor %}
+        {% endif %}
+        <br>
+        {% if page.parent %}
+            Based on <a href="/distros/{{ page.parent }}.html">{{ page.parent }}</a>, and a descendant of <a href="/distros/{{ page.base }}.html">{{ page.base }}</a>.
+        {% endif %}
+        <div class="star-rating-container">
+            Rating: <meter min="0" max="5" value="4.7" class="star-rating" title="4.7 out of 5 stars">4.7 out of 5</meter><span class="numeric-rating">4.7/5</span>
+        </div>
+    </p>
+</article>
+<article class="card">
+    <h2>System information</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Kernel
+                </td>
+                <td>
+                    {{ page.kernel }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Core utilities
+                </td>
+                <td>
+                    {{ page.coreutils }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Desktops ({{ page.desktops | size }})
+                </td>
+                <td>
+                    {% if page.desktops.size == 0 %}
+                        none
+                    {% elsif page.desktops.size == 1 %}
+                        {{ page.desktops[0] }}
+                    {% else %}
+                        {% for desktop in page.desktops %}
+                            {% if forloop.last %}and{% endif %} <a href="/desktops/{{ desktop }}.html">{{ desktop }}</a>{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Default shell
+                </td>
+                <td>
+                    {{ page.default-shell }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Init system
+                </td>
+                <td>
+                    {{ page.initialiser }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Directly based on
+                </td>
+                <td>
+                    {{ page.parent }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Descendant of
+                </td>
+                <td>
+                    {{ page.base }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card">
+    <h2>Packaging</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    System package manager
+                </td>
+                <td>
+                    {{ page.packaging-system }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Supports PPAs
+                </td>
+                <td>
+                    {{ page.supports-ppas }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Other officially supported packaging systems ({{ page.other-packaging-systems | size }})
+                </td>
+                <td>
+                    {% if page.other-packaging-systems.size == 0 %}
+                        none
+                    {% elsif page.other-packaging-systems.size == 1 %}
+                        {{ page.other-packaging-systems[0] }}
+                    {% else %}
+                        {% for manager in page.other-packaging-systems %}
+                            {% if forloop.last %}and{% endif %} {{ manager }}{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Other compatible packaging systems ({{ page.compatible-packaging-systems | size }})
+                </td>
+                <td>
+                    {% if page.compatible-packaging-systems.size == 0 %}
+                        none
+                    {% elsif page.compatible-packaging-systems.size == 1 %}
+                        {{ page.compatible-packaging-systems[0] }}
+                    {% else %}
+                        {% for manager in page.compatible-packaging-systems %}
+                            {% if forloop.last %}and{% endif %} {{ manager }}{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Includes graphical "app store"
+                </td>
+                <td>
+                    {{ page.app-store }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card">
+    <h2>Ideology and licensing</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Approved by the <abbr title="Free Software Foundation">FSF</abbr>
+                    <em>(distros approved by the FSF must only offer free software)</em>
+                </td>
+                <td>
+                    {{ page.fsf-approved }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Free by default <em>(as freshly installed, not counting optional extras or binary blobs)</em>
+                </td>
+                <td>
+                    {{ page.free-by-default }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Only offers free software in default repositories
+                </td>
+                <td>
+                    {{ page.free-only-repos }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Offers proprietary drivers
+                </td>
+                <td>
+                    {{ page.proprietary-drivers }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Offers proprietary media codecs
+                </td>
+                <td>
+                    {{ page.proprietary-codecs }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    For-profit business
+                </td>
+                <td>
+                    {{ page.commercial }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Price
+                </td>
+                <td>
+                    {% if page.price[0] == 0 and page.price[1] == 0 %} Free
+                    {% elsif page.price[0] == 0 %} Free, with editions up to {{ page.price[1] }} &euro; available
+                    {% elsif page.price[0] == page.price[1] %} {{ page.price[1] }} &euro;
+                    {% else %} {{ page.price[0] }} to {{ page.price[1] }} &euro;
+                    {% endif %}        
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card">
+    <h2>Release model</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Active
+                </td>
+                <td>
+                    {{ page.working-state }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rolling release
+                    <em>(pushes new packages all the time, no fixed versions)</em>
+                </td>
+                <td>
+                    {{ page.rolling }}
+                </td>
+            </tr>
+            {% unless page.rolling %}
+                <tr>
+                    <td>
+                        Stable release each
+                    </td>
+                    <td>
+                        {{ page.release-each }} months
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Stable <abbr title="Long-Term Support">LTS</abbr> release each
+                    </td>
+                    <td>
+                        {% if page.lts-each == 0 %}
+                            No LTS releases
+                        {% elsif page.lts-each == 1 %}
+                            LTS-only
+                        {% else %}
+                            {{ page.lts-each }} releases ({{ page.lts-each | times: page.release-each }} months)
+                        {% endif %}
+                    </td>
+                </tr>
+                {% unless page.lts-each == 1 %}
+                    <tr>
+                        <td>
+                            Support duration for regular releases
+                        </td>
+                        <td>
+                            {{ page.interim-support }} months
+                        </td>
+                    </tr>
+                {% endunless %}
+                {% unless page.lts-each == 0 %}
+                    <tr>
+                        <td>
+                            Support duration for <abbr title="Long-Term Support">LTS</abbr> releases
+                        </td>
+                        <td>
+                            {{ page.lts-support }} months
+                        </td>
+                    </tr>
+                {% endunless %}
+            {% endunless %}
+            <tr>
+                <td>
+                    Since
+                </td>
+                <td>
+                    {{ page.since }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Country of origin
+                </td>
+                <td>
+                    {{ page.country }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card">
+    <h2>Installation</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Graphical installer
+                </td>
+                <td>
+                    {{ page.gui-installer }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Text installer
+                </td>
+                <td>
+                    {{ page.cli-installer }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Live mode
+                    <em>(allows testing the OS without installing it)</em>
+                </td>
+                <td>
+                    {{ page.live }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card">
+    <h2>System requirements</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Supported CPU architectures ({{ page.supported-architectures | size }})
+                </td>
+                <td>
+                    {% if page.supported-architectures.size == 0 %}
+                        none
+                    {% elsif page.supported-architectures.size == 1 %}
+                        {{ page.supported-architectures[0] }}
+                    {% else %}
+                        {% for arch in page.supported-architectures %}
+                            {% if forloop.last %}and{% endif %} {{ arch }}{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Minimum RAM
+                </td>
+                <td>
+                    {{ page.minimum-requirements.ram }} MB
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Minimum storage
+                </td>
+                <td>
+                    {{ page.minimum-requirements.storage }} GB
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Internet required for installation
+                </td>
+                <td>
+                    {{ page.minimum-requirements.network }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Recommended RAM
+                </td>
+                <td>
+                    {{ page.recommended-requirements.ram }} MB
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Recommended storage
+                </td>
+                <td>
+                    {{ page.recommended-requirements.storage }} GB
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Internet connection recommended
+                </td>
+                <td>
+                    {{ page.recommended-requirements.network }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Recommended screen resolution
+                </td>
+                <td>
+                    {% if page.recommended-requirements.display %}
+                        {{ page.recommended-requirements.display[0] }}&times;{{ page.recommended-requirements.display[1] }}
+                    {% else %}
+                        No display recommended
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article class="card" id="difficulty-ratings">
+    <h2>Difficulty</h2>
+    <p>Lower is easier. This data is intended for new users.</p>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Installation
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ page.difficulty.installation }}.svg" class="difficulty" alt="Level {{ page.difficulty.installation }} out of 5" title="Level {{ page.difficulty.installation }} out of 5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Daily usage
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ page.difficulty.daily-usage }}.svg" class="difficulty" alt="Level {{ page.difficulty.daily-usage }} out of 5" title="Level {{ page.difficulty.daily-usage }} out of 5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Maintenance
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ page.difficulty.maintenance }}.svg" class="difficulty" alt="Level {{ page.difficulty.maintenance }} out of 5" title="Level {{ page.difficulty.maintenance }} out of 5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Upgrading
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ page.difficulty.upgrading }}.svg" class="difficulty" alt="Level {{ page.difficulty.upgrading }} out of 5" title="Level {{ page.difficulty.upgrading }} out of 5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Troubleshooting
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ page.difficulty.troubleshooting }}.svg" class="difficulty" alt="Level {{ page.difficulty.troubleshooting }} out of 5" title="Level {{ page.difficulty.troubleshooting }} out of 5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    General difficulty
+                </td>
+                <td>
+                    <img src="/assets/images/difficulty/{{ general-difficulty }}.svg" class="difficulty" alt="Level {{ general-difficulty }} out of 5" title="Level {{ general-difficulty }} out of 5">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+
+<h2>Comments</h2>
+<form>
+    <p>Leave a comment:</p>
+    <input name="options[slug]" type="hidden" value="{{ page.id }}">
+    <div class="input-container">
+        <input name="fields[name]" type="text" id="comment-name" placeholder=" ">
+        <label for="comment-name">Name</label>
+    </div>
+    <div class="input-container">
+        <input name="fields[email]" type="email" id="comment-email" placeholder=" ">
+        <label for="comment-email">Email</label>    
+    </div>
+    <div class="input-container">
+        <input name="fields[url]" type="url" id="comment-url" placeholder=" ">
+        <label for="comment-url">Link</label>
+    </div>
+    <div id="comment-type-options">
+        <div class="inline-input-container">
+            <input type="radio" id="comment-star-rating-0" name="fields[star-rating]" required>
+            <label for="comment-star-rating-0">Comment</label>
+        </div>
+        <div id="comment-star-rating-options">
+            <input type="radio" id="comment-star-rating-5" name="fields[star-rating]" required>
+            <label for="comment-star-rating-5">5 stars</label>
+            <input type="radio" id="comment-star-rating-4" name="fields[star-rating]" required>
+            <label for="comment-star-rating-4">4 stars</label>
+            <input type="radio" id="comment-star-rating-3" name="fields[star-rating]" required>
+            <label for="comment-star-rating-3">3 stars</label>
+            <input type="radio" id="comment-star-rating-2" name="fields[star-rating]" required>
+            <label for="comment-star-rating-2">2 stars</label>
+            <input type="radio" id="comment-star-rating-1" name="fields[star-rating]" required>
+            <label for="comment-star-rating-1">1 star</label>
+            Give rating:
+        </div>
+    </div>
+    <div class="input-container">
+        <textarea name="fields[message]" type="email" id="comment-message" placeholder="Message. Markdown is supported. Minimum 100 words." required></textarea>
+    </div><br>
+    <input type="submit" class="button" value="Post comment">
+</form>
+
+

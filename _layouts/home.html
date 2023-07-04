@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/assets/styles/main.css">
+    <title>Switching to Linux is easy. switchtolinux.today</title>
+    <style>
+      #hero, #cta {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #hero {
+        background-image: linear-gradient(to bottom, #00bcd4c0, 25%, #ffffff60), linear-gradient(to bottom, #ffffffc0, #ffffff40), url("/assets/images/header.png"),  linear-gradient(to bottom, #00bcd4, #ffffff);
+        background-size: cover;
+        background-position-x: center;
+        background-position-y: bottom;
+        height: clamp(256px, 33vh, 576px);
+        margin: 0;
+      }
+      
+      h1 {
+        font-size: 4em;
+        font-weight: 300;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      {% include navbar.html %}
+      <div id="hero">
+        <h1>Linux is Easy Now.</h1>
+        <p>
+          Get a better computer experience with a Linux distro.
+        </p>
+        <a href="/getstarted" class="button">Get started</a>
+      </div>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer>
+      {% include footer.html %}
+    </footer>
+  </body>
+  <script src="/assets/scripts/ripples.js"></script>
+</html>
