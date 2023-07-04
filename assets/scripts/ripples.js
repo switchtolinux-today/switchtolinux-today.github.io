@@ -1,7 +1,7 @@
 console.log("hello, material ripple script loaded");
 
 (() => {
-    const rippleHosts = document.querySelectorAll('.button, .flickity-button');
+    const rippleHosts = document.querySelectorAll('.button, .flickity-button, .btn, button');
 
     function generateRipple(rippleX, rippleY, rippleDimensions) {
         const div = document.createElement('div');
