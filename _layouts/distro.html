@@ -744,44 +744,19 @@ layout: default
 </article>
 
 <h2>Comments</h2>
-<form>
-    <p>Leave a comment:</p>
-    <input name="options[slug]" type="hidden" value="{{ page.id }}">
-    <div class="input-container">
-        <input name="fields[name]" type="text" id="comment-name" placeholder=" ">
-        <label for="comment-name">Name</label>
-    </div>
-    <div class="input-container">
-        <input name="fields[email]" type="email" id="comment-email" placeholder=" ">
-        <label for="comment-email">Email</label>    
-    </div>
-    <div class="input-container">
-        <input name="fields[url]" type="url" id="comment-url" placeholder=" ">
-        <label for="comment-url">Link</label>
-    </div>
-    <div id="comment-type-options">
-        <div class="inline-input-container">
-            <input type="radio" id="comment-star-rating-0" name="fields[star-rating]" required>
-            <label for="comment-star-rating-0">Comment</label>
-        </div>
-        <div id="comment-star-rating-options">
-            <input type="radio" id="comment-star-rating-5" name="fields[star-rating]" required>
-            <label for="comment-star-rating-5">5 stars</label>
-            <input type="radio" id="comment-star-rating-4" name="fields[star-rating]" required>
-            <label for="comment-star-rating-4">4 stars</label>
-            <input type="radio" id="comment-star-rating-3" name="fields[star-rating]" required>
-            <label for="comment-star-rating-3">3 stars</label>
-            <input type="radio" id="comment-star-rating-2" name="fields[star-rating]" required>
-            <label for="comment-star-rating-2">2 stars</label>
-            <input type="radio" id="comment-star-rating-1" name="fields[star-rating]" required>
-            <label for="comment-star-rating-1">1 star</label>
-            Give rating:
-        </div>
-    </div>
-    <div class="input-container">
-        <textarea name="fields[message]" type="email" id="comment-message" placeholder="Message. Markdown is supported. Minimum 100 words." required></textarea>
-    </div><br>
-    <input type="submit" class="button" value="Post comment">
-</form>
-
-
+<script src="https://giscus.app/client.js"
+        data-repo="switchtolinux-today/switchtolinux-today.github.io"
+        data-repo-id="R_kgDOJ3UdMQ"
+        data-category="Comments"
+        data-category-id="DIC_kwDOJ3UdMc4CXqhZ"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="https://switchtolinux-today.github.io/assets/styles/giscus.css"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
