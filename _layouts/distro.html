@@ -273,7 +273,7 @@ layout: default
             {{ page.desktops[0] }}.
         {% else %}
             {% for desktop in page.desktops %}
-                {% if forloop.last %}and{% endif %} <a href="/desktops/{{ desktop }}.html">{{ desktop }}</a>{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                {% if forloop.last %}and{% endif %} {{ desktop }}{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
             {% endfor %}
         {% endif %}
         <br>
@@ -318,7 +318,7 @@ layout: default
                         {{ page.desktops[0] }}
                     {% else %}
                         {% for desktop in page.desktops %}
-                            {% if forloop.last %}and{% endif %} <a href="/desktops/{{ desktop }}.html">{{ desktop }}</a>{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
+                            {% if forloop.last %}and{% endif %} {{ desktop }}{% unless forloop.last %},{% endunless %}{% if forloop.last %}.{% endif %}
                         {% endfor %}
                     {% endif %}
                 </td>
