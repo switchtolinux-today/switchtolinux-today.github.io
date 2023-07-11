@@ -142,11 +142,12 @@ table {
 }
 
 footer {
+    display: flex;
     background-color: #eeeeee;
     flex-shrink: 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 12px;
+    flex-flow: row wrap;
 }
 
 :target {
@@ -182,12 +183,20 @@ figure img {
     font-size: 3em;
 }
 
-#footer-links li {
-    float: left;
+#footer-links {
+    flex: 1 0 auto;
 }
 
-#footer-links {
-    padding: 0;
-    list-style-position: inside;
-    list-style-type: disc;
+footer > section:not(:last-child) {
+    border-right: 1px solid #00000060;
+}
+
+footer section {
+    padding: 12px;
+}
+
+.buttonbox {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 12px;
 }

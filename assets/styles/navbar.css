@@ -14,14 +14,16 @@ nav {
 }
 
 nav ul {
-    height: 64px;
+    min-height: 64px;
+    height: auto;
     margin: 0;
-    padding-left: 24px;
+    padding: 12px 24px;
     list-style: none;
     display: flex;
     column-gap: 12px;
     align-items: center;
     box-sizing: border-box;
+    flex-flow: row nowrap;
 }
 
 nav ul li {
@@ -36,4 +38,48 @@ nav ul li a:any-link {
 
 nav ul li a:hover, nav ul li a:active {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 512px) {
+    nav ul {
+        margin: 0;
+        padding-left: 24px;
+        list-style: none;
+        display: flex;
+        column-gap: 12px;
+        align-items: center;
+        box-sizing: border-box;
+        flex-flow: column nowrap;
+    }
+
+    #clear-nav {
+        display: none;
+    }
+
+    nav {
+        position: relative;
+    }
+}
+
+#skip-link {
+    position: absolute;
+    z-index: 4096;
+    background-color: #1976d2;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transform: translateY(-200%);
+    transition: transform 375ms ease;
+    text-transform: uppercase;
+    padding: 0 12px;
+    box-sizing: border-box;
+    bottom: 12px;
+}
+
+#skip-link:focus {
+    transform: translateY(0);
+    outline: none;
 }
